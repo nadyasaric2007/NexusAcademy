@@ -39,7 +39,7 @@ Para ejecutar el proyecto, se debe crear manualmente un archivo llamado `db_conf
 #endif
 ```
 
-## ⚙️ 2. Instalación y Puesta en Marcha
+## 2. Instalación y Puesta en Marcha
 
 ### Paso A: Despliegue de Base de Datos
 * Abre **MySQL Workbench**.
