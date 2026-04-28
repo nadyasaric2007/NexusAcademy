@@ -5,8 +5,6 @@
 #include "db_config.h"
 
 using namespace std;
-
-// Estructura para espejar la tabla alumnos
 struct Alumno {
     int id;
     string nombre;
@@ -16,7 +14,6 @@ struct Alumno {
     string estado;
 };
 
-// A. Consultas Individuales (Buscador)
 void buscarAlumno(MYSQL* conn) {
     int id;
     cout << "\nIngrese el ID del alumno: "; cin >> id;
@@ -39,7 +36,6 @@ void buscarAlumno(MYSQL* conn) {
     mysql_free_result(res);
 }
 
-// B. Análisis de Rendimiento (Filtros SQL)
 void mostrarRanking(MYSQL* conn, bool cuadroHonor) {
 
     string query = cuadroHonor ? 
@@ -57,19 +53,16 @@ void mostrarRanking(MYSQL* conn, bool cuadroHonor) {
     mysql_free_result(res);
 }
 
-// C. Actualización de Datos (Con lógica automática de Aprobado/Reprobado)
 void actualizarDatos(MYSQL* conn, int tipo) {
     int id;
     cout << "\nID del alumno a modificar: "; cin >> id;
     
-    if (tipo == 1) { // MODIFICAR NOTA + ACTUALIZAR ESTADO
+    if (tipo == 1) { 
         double nuevaNota;
         cout << "Nueva nota final: "; cin >> nuevaNota;
         
-        // Lógica de estado automática
         string nuevoEstado = (nuevaNota >= 5.0) ? "Aprobado" : "Reprobado";
-        
-        // Actualizamos ambos campos en una sola sentencia SQL
+
         string query = "UPDATE alumnos SET nota_final = " + to_string(nuevaNota) + 
                        ", estado = '" + nuevoEstado + "' WHERE id = " + to_string(id);
         
@@ -79,7 +72,7 @@ void actualizarDatos(MYSQL* conn, int tipo) {
             cout << "Error al actualizar nota: " << mysql_error(conn) << endl;
         }
     } 
-    else { // CAMBIAR CELULAR
+    else { 
         string nuevoCel;
         cout << "Nuevo numero de celular: "; cin >> nuevoCel;
         string query = "UPDATE alumnos SET celular = '" + nuevoCel + "' WHERE id = " + to_string(id);
